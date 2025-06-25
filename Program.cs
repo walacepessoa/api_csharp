@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Adiciona suporte a controllers e Swagger
@@ -7,6 +9,9 @@ builder.Services.AddSwaggerGen();
 
 // Define a URL da aplicação
 builder.WebHost.UseUrls("http://localhost:5000");
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite("Data Source=meubanco.db"));
 
 var app = builder.Build();
 
@@ -47,3 +52,4 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+

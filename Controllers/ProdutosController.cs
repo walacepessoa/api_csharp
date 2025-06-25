@@ -1,32 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MinhaApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProdutoController : ControllerBase
+    public class ProdutosController : ControllerBase
     {
-        // Modelo simples de produto
-        public class Produto
+        private readonly AppDbContext _context;
+
+        public ProdutosController(AppDbContext context)
         {
-            public int Id { get; set; }
-            public string Nome { get; set; }
-            public decimal Preco { get; set; }
+            _context = context;
         }
 
-        // Lista mockada de produtos
-        private static readonly List<Produto> Produtos = new()
-        {
-            new Produto { Id = 1, Nome = "Notebook", Preco = 3500.00M },
-            new Produto { Id = 2, Nome = "Mouse Gamer", Preco = 150.00M },
-            new Produto { Id = 3, Nome = "Teclado Mecânico", Preco = 450.00M }
-        };
-
-        // GET: api/produto
         [HttpGet]
-        public ActionResult<IEnumerable<Produto>> Get()
+        public async Task<ActionResult<IEnumerable<Produto>>> Get()
         {
-            return Ok(Produtos);
+            return await _context.Produtos.ToListAsync();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Produto>> Post(Produto produto)
+        {
+            _context.Produtos.Add(produto);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(Get), new { id = produto.Id }, produto);
         }
     }
 }
