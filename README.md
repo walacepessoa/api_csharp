@@ -1,5 +1,5 @@
-API C# - ASP.NET Core
----------------------
+API C# - ASP.NET Core + swagger
+-------------------------------
 
 API REST desenvolvida em C# com ASP.NET Core, utilizando boas práticas de arquitetura e extensível para integrações com bancos de dados e serviços externos.
 
