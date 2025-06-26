@@ -1,5 +1,7 @@
 API C# - ASP.NET Core + swagger
 -------------------------------
+📌 Projeto: MinhaApi.sln<br/>
+Descrição:<br/>
 API REST desenvolvida em C# com ASP.NET Core, utilizando boas práticas de arquitetura e extensível para integrações com bancos de dados e serviços externos.
 <p>
 🚀 Tecnologias utilizadas<br/>
